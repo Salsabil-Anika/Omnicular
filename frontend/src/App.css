@@ -1,0 +1,13 @@
+/* src/App.css */
+.App {
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+}
+input, button {
+  margin: 5px;
+  padding: 8px;
+}
+video {
+  margin-top: 10px;
+}
