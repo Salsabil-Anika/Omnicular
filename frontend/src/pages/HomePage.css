@@ -114,3 +114,32 @@
 .navbar button:hover {
   background-color: #17a44d;
 }
+
+.search-bar-container {
+  display: flex;
+  padding: 10px 20px;
+  background: white;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+.search-btn {
+  background-color: #1db954;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.search-btn:hover {
+  background-color: #17a44d;
+}
