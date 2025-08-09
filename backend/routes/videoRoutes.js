@@ -37,6 +37,24 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// ✅ SEARCH videos by title or description
+router.get('/search/:query', async (req, res) => {
+  try {
+    const searchTerm = req.params.query;
+    const videos = await Video.find({
+      $or: [
+        { title: { $regex: searchTerm, $options: 'i' } },       // case-insensitive match
+        { description: { $regex: searchTerm, $options: 'i' } }
+      ]
+    });
+
+    res.json(videos);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
 router.put('/:id', updateVideo);
 router.delete('/:id', deleteVideo);
 
