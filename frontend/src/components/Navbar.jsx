@@ -6,8 +6,8 @@ export default function Navbar({ onSearch }) {
 
   return (
     <nav className="navbar">
-      <h2 
-        style={{ cursor: 'pointer' }} 
+      <h2
+        style={{ cursor: 'pointer' }}
         onClick={() => navigate('/')}
       >
         Omnicular
