@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import VideoUploadForm from './components/VideoUploadForm';
-import VideoList from './components/VideoList';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import UploadPage from './pages/uploadPage';
+import SignInPage from './pages/SignInPage';
+import VideoPlayerPage from './pages/VideoPlayerPage';
 
 function App() {
-  const [refresh, setRefresh] = useState(false);
-
-  const onUploadSuccess = () => setRefresh(!refresh);
-
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Omnicular</h1>
-      <VideoUploadForm onUploadSuccess={onUploadSuccess} />
-      <hr />
-      <VideoList refresh={refresh} />
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/upload" element={<UploadPage />} />
+      <Route path="/auth" element={<SignInPage />} />
+      <Route path="/video/:id" element={<VideoPlayerPage />} />
+      
+    </Routes>
   );
 }
 

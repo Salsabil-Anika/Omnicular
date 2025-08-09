@@ -1,0 +1,33 @@
+.signin-page {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.signin-form input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.toggle-link {
+  margin-top: 15px;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}

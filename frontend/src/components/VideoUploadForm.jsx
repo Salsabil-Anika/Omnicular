@@ -14,21 +14,31 @@ const VideoUploadForm = ({ onUploadSuccess }) => {
     formData.append('video', video);
 
     try {
-      await axios.post('http://localhost:5000/api/videos', formData, {
+      const res = await axios.post('http://localhost:5000/api/videos', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
+
+      console.log('Upload response:', res.data);
+
+      // ✅ Show backend message
+      alert(res.data.message || 'Upload successful!');
+
+      // ✅ Clear form if successful
       setTitle('');
       setVideo(null);
-      onUploadSuccess();
+
+      // ✅ Let parent know upload finished
+      if (onUploadSuccess) onUploadSuccess(res.data.video);
+
     } catch (err) {
-      alert('Upload failed');
-      console.error(err);
+      console.error('Upload error:', err.response?.data || err.message);
+      alert(err.response?.data?.message || 'Upload failed');
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Upload Video</h3>
+      <h3 id="upload-message">Share your Video</h3>
       <input
         type="text"
         placeholder="Video Title"

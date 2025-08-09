@@ -1,0 +1,116 @@
+/* Layout */
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  background-color: #f9f9f9;
+}
+
+/* Sidebar */
+
+.sidebar {
+  width: 220px;
+  background-color: #202020;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar a {
+  color: white;
+  display: block;
+  margin-bottom: 15px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.sidebar a:hover {
+  color: #1db954; /* Spotify green for example */
+}
+
+/* Videos Grid */
+
+.videos-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+  gap: 20px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Video Card */
+
+.video-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-player {
+  border-radius: 8px;
+  max-height: 160px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.video-title {
+  font-size: 1.1rem;
+  margin: 0 0 6px 0;
+  color: #111;
+}
+
+.video-description {
+  font-size: 0.9rem;
+  color: #555;
+  flex-grow: 1;
+}
+
+/* Navbar */
+
+.navbar {
+  background-color: #121212;
+  padding: 10px 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar h2 {
+  margin: 0;
+  cursor: pointer;
+}
+
+.navbar input[type="text"] {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: none;
+  width: 250px;
+}
+
+.navbar button {
+  background-color: #1db954;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+.navbar button:hover {
+  background-color: #17a44d;
+}

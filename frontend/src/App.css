@@ -1,13 +1,73 @@
-/* src/App.css */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
-  text-align: center;
-  max-width: 600px;
+  max-width: 800px;
   margin: auto;
+  padding: 40px 20px;
+  background: #ab1e1e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  margin-top: 40px;
 }
-input, button {
-  margin: 5px;
-  padding: 8px;
+
+h1 {
+  color: #093760;
+  text-align: center;
+  margin-bottom: 30px;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #1f618d;
+}
+
+hr {
+  margin: 30px 0;
+}
+
+.video-card {
+  background: #f9f9f9;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border-left: 5px solid #2980b9;
+}
+
 video {
+  width: 100%;
+  border-radius: 6px;
   margin-top: 10px;
+}
+#upload-message {
+  color: #5d7c98;
+  text-align: center;
 }

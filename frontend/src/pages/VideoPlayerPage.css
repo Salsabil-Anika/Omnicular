@@ -1,0 +1,25 @@
+.video-player-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  display: flex;
+  flex-grow: 1;
+}
+
+.video-player-container {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.video-player-container video {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.video-player-container h2 {
+  margin-bottom: 10px;
+}
