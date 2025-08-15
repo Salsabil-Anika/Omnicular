@@ -1,62 +1,31 @@
-.upload-page {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.upload-main {
-  display: flex;
-  flex: 1;
-  background-color: #f9f9f9;
-}
-
 .upload-form-container {
-  flex: 1;
-  padding: 30px;
-  max-width: 700px;
-  margin-left: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgb(0 0 0 / 15%);
+  flex: 1; /* same as VideoGrid in Homepage */
+  padding: 20px 40px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  max-width: 600px;
+  margin-left: 20px; /* small gap from sidebar */
 }
 
-.upload-form h2 {
+.upload-form-container h2 {
+  font-family: inherit; /* match Navbar/Sidebar font */
   margin-bottom: 20px;
-  color: #111;
 }
 
-.upload-form label {
+.upload-form-container input,
+.upload-form-container textarea,
+.upload-form-container button {
+  font-family: inherit; /* match Navbar/Sidebar font */
   display: block;
-  margin: 10px 0 5px;
-  font-weight: 600;
-}
-
-.upload-form input,
-.upload-form textarea {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
   margin-bottom: 15px;
-  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
-.upload-form textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-.upload-form button {
-  background-color: #1db954;
+.upload-form-container button {
+  background-color: #4caf50;
   color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-weight: 600;
   cursor: pointer;
-}
-
-.upload-form button:hover {
-  background-color: #17a44d;
 }

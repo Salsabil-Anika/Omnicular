@@ -1,4 +1,3 @@
-// src/components/VideoCard.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './VideoCard.css';
@@ -7,7 +6,6 @@ export default function VideoCard({ video }) {
   return (
     <Link
       to={`/video/${video._id}`}
-      key={video._id}
       className="video-card"
       style={{ textDecoration: 'none', color: 'inherit' }}
     >
@@ -17,7 +15,9 @@ export default function VideoCard({ video }) {
         className="video-player"
       />
       <h4 className="video-title">{video.title}</h4>
+      <p className="video-uploader">
+        {video.uploadedBy?.name || 'Unknown'}
+      </p>
     </Link>
-
   );
 }

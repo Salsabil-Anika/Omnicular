@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const Video = require('../models/videoModel'); // ✅ import model
+const Video = require('../models/videoModel');
 const { uploadVideo, updateVideo, deleteVideo } = require('../controllers/videoController');
-
+const auth = require('../middleware/auth');
 
 // Multer config
 const storage = multer.diskStorage({
@@ -13,20 +13,24 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// ✅ POST upload video
-router.post('/', upload.single('video'), uploadVideo);
+// Upload video (attach user)
+router.post('/', auth, upload.single('video'), uploadVideo);
 
-// ✅ GET all videos
+// GET all videos
 router.get('/', async (req, res) => {
   try {
-    const videos = await Video.find();
+    const videos = await Video.find()
+      .sort({ createdAt: -1 })
+      .populate('uploadedBy', 'name'); // populate only name
     res.json(videos);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// GET /videos/search?query=someText
+
+
+// ✅ Search videos
 router.get('/search', async (req, res) => {
   const query = req.query.query || '';
   try {
@@ -42,8 +46,18 @@ router.get('/search', async (req, res) => {
   }
 });
 
+// ✅ Get logged-in user's videos (ONLY ONE ROUTE)
+router.get('/my-videos', auth, async (req, res) => {
+  try {
+    const videos = await Video.find({ uploadedBy: req.userId }).populate('uploadedBy', 'name');
+    res.json(videos);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
-// ✅ GET video by ID
+
+// ✅ GET video by ID (dynamic route, must come last among GETs)
 router.get('/:id', async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
@@ -53,8 +67,6 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-
 
 router.put('/:id', updateVideo);
 router.delete('/:id', deleteVideo);

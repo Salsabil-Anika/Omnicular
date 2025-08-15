@@ -4,33 +4,43 @@ const path = require('path'); // Node.js module to handle file paths
 
 exports.uploadVideo = async (req, res) => {
   try {
-    console.log('Uploaded file:', req.file);  // Should print file info
-
-    const { title } = req.body;
     if (!req.file) return res.status(400).json({ message: 'No video uploaded' });
+    if (!req.userId) return res.status(401).json({ message: 'User not authenticated' });
 
-    const videoUrl = `/uploads/${req.file.filename}`;
-    const video = new Video({ title, videoUrl });
+    const { title, description } = req.body;
+
+    // Create video and attach uploader
+    const video = new Video({
+      title,
+      description,
+      videoUrl: '/uploads/' + req.file.filename,
+      uploadedBy: req.userId, // attach user ID
+    });
 
     await video.save();
-    console.log('Video saved to DB:', video);
 
-    res.status(201).json(video);
+    // Populate uploadedBy with the user's name before sending response
+    await video.populate('uploadedBy', 'name');
+
+    res.status(201).json(video); // return the video with uploader's name
   } catch (err) {
-    console.error('Upload error:', err);
     res.status(500).json({ message: err.message });
   }
 };
 
 
+
 exports.getAllVideos = async (req, res) => {
   try {
-    const videos = await Video.find().sort({ createdAt: -1 });
+    const videos = await Video.find()
+      .sort({ createdAt: -1 })
+      .populate('uploadedBy', 'name'); // ✅ populate uploader name
     res.json(videos);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
+
 
 exports.updateVideo = async (req, res) => {
   try {

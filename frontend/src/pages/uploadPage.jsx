@@ -1,74 +1,86 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
-import { uploadVideo } from '../services/videoService';
+import Navbar from '../components/Navbar';
+import axios from 'axios';
 import './uploadPage.css';
 
-export default function UploadPage({ onVideoUploaded }) {
+export default function UploadPage() {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [file, setFile] = useState(null);
+  const [videoFile, setVideoFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleUpload = async (e) => {
+  // ✅ Redirect to sign-in if not logged in
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('You must sign in to upload videos.');
+      navigate('/signin');
+    }
+  }, [navigate]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file) return alert('Please select a video file!');
-    setLoading(true);
+
+    if (!videoFile || !title) {
+      alert('Title and video file are required!');
+      return;
+    }
 
     const formData = new FormData();
-    formData.append('video', file);
+    formData.append('video', videoFile);
     formData.append('title', title);
     formData.append('description', description);
 
+    setLoading(true);
+
     try {
-      const res = await uploadVideo(formData);
-      alert('Video uploaded successfully!');
-      onVideoUploaded && onVideoUploaded(res); // notify parent
-      setTitle('');
-      setDescription('');
-      setFile(null);
+      const token = localStorage.getItem('token');
+      const res = await axios.post('http://localhost:5000/api/videos', formData, {
+        headers: { 
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      alert('Upload successful!');
+      navigate('/my-videos'); // redirect to user's video list
     } catch (err) {
       console.error(err);
-      alert('Upload failed!');
+      alert(err.response?.data?.message || 'Upload failed');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="upload-page">
+    <div className="homepage">
       <Navbar />
-      <div className="upload-main">
+      <div className="main-content">
         <Sidebar />
         <div className="upload-form-container">
-          <h2>Upload a Video</h2>
-          <form onSubmit={handleUpload} className="upload-form">
-            <label>Title</label>
+          <h2>Upload Video</h2>
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
+              placeholder="Video Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter video title"
               required
             />
-
-            <label>Description</label>
             <textarea
+              placeholder="Description (optional)"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Enter video description"
             />
-
-            <label>Video File</label>
             <input
               type="file"
               accept="video/*"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={(e) => setVideoFile(e.target.files[0])}
               required
             />
-
             <button type="submit" disabled={loading}>
               {loading ? 'Uploading...' : 'Upload'}
             </button>

@@ -10,12 +10,16 @@ const VideoList = ({ refresh }) => {
 
   const fetchVideos = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/videos');
+      const token = localStorage.getItem('token');
+      const res = await axios.get('http://localhost:5000/api/videos/my-videos', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       setVideos(res.data);
     } catch (err) {
       console.error(err);
     }
   };
+
 
   useEffect(() => {
     fetchVideos();

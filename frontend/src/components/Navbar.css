@@ -1,0 +1,27 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* space between input and button */
+}
+
+.search-input {
+  width: 300px; /* make it wider */
+  padding: 5px 10px;
+}
+
+.search-button {
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.nav-buttons button {
+  margin-left: 10px;
+  cursor: pointer;
+}
