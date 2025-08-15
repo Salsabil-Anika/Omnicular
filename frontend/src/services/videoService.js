@@ -12,3 +12,8 @@ export const updateVideo = (id, formData) => axios.put(`${API_URL}/${id}`, formD
 export const deleteVideo = (id) => {
   return axios.delete(`http://localhost:5000/api/videos/${id}`);
 };
+export const searchVideos = async (query) => {
+  const res = await axios.get(`${API_URL}/search?query=${encodeURIComponent(query)}`);
+  return res.data;
+};
+

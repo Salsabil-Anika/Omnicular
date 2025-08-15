@@ -26,6 +26,23 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET /videos/search?query=someText
+router.get('/search', async (req, res) => {
+  const query = req.query.query || '';
+  try {
+    const videos = await Video.find({
+      $or: [
+        { title: { $regex: '^' + query, $options: 'i' } },
+        { description: { $regex: '^' + query, $options: 'i' } }
+      ]
+    });
+    res.json(videos);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 // ✅ GET video by ID
 router.get('/:id', async (req, res) => {
   try {
@@ -37,22 +54,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// ✅ SEARCH videos by title or description
-router.get('/search/:query', async (req, res) => {
-  try {
-    const searchTerm = req.params.query;
-    const videos = await Video.find({
-      $or: [
-        { title: { $regex: searchTerm, $options: 'i' } },       // case-insensitive match
-        { description: { $regex: searchTerm, $options: 'i' } }
-      ]
-    });
-
-    res.json(videos);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
 
 
 router.put('/:id', updateVideo);

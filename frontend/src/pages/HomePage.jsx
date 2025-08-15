@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import { getVideos } from '../services/videoService';
+import VideoGrid from '../components/VideoGrid';
 import './HomePage.css';
 
 export default function HomePage() {
@@ -35,27 +35,7 @@ export default function HomePage() {
       <Navbar onSearch={handleSearch} />
       <div className="main-content">
         <Sidebar />
-        <div className="videos-grid">
-          {filteredVideos.length === 0 && <p>No videos found.</p>}
-          {filteredVideos.map((video) => (
-            <Link
-              to={`/video/${video._id}`}
-              key={video._id}
-              className="video-card"
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              <video
-                src={`http://localhost:5000${video.videoUrl}`}
-                controls
-                className="video-player"
-              />
-              <h4 className="video-title">{video.title}</h4>
-              <p className="video-description">
-                {video.description || 'No description.'}
-              </p>
-            </Link>
-          ))}
-        </div>
+        <VideoGrid videos={filteredVideos} />
       </div>
     </div>
   );

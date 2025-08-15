@@ -16,6 +16,7 @@ mongoose.connect('mongodb://localhost:27017/omnicular')
 
 app.use('/api/videos', videoRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/videos', videoRoutes);
 
 app.use(cors({
   origin: 'http://localhost:3000',
