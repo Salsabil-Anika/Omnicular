@@ -1,10 +1,13 @@
-const express = require('express');
+// videoRoutes.js (ESM)
+import express from 'express';
+import multer from 'multer';
+import path from 'path';
+import Video from '../models/videoModel.js';
+import { uploadVideo, updateVideo, deleteVideo } from '../controllers/videoController.js';
+import { protect } from '../middleware/authMiddleware.js';
+
+
 const router = express.Router();
-const multer = require('multer');
-const path = require('path');
-const Video = require('../models/videoModel');
-const { uploadVideo, updateVideo, deleteVideo } = require('../controllers/videoController');
-const auth = require('../middleware/auth');
 
 // Multer config
 const storage = multer.diskStorage({
@@ -14,7 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Upload video (attach user)
-router.post('/', auth, upload.single('video'), uploadVideo);
+router.post('/', protect, upload.single('video'), uploadVideo);
 
 // GET all videos
 router.get('/', async (req, res) => {
@@ -27,8 +30,6 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-
 
 // ✅ Search videos
 router.get('/search', async (req, res) => {
@@ -46,8 +47,8 @@ router.get('/search', async (req, res) => {
   }
 });
 
-// ✅ Get logged-in user's videos (ONLY ONE ROUTE)
-router.get('/my-videos', auth, async (req, res) => {
+// ✅ Get logged-in user's videos
+router.get('/my-videos', protect, async (req, res) => {
   try {
     const videos = await Video.find({ uploadedBy: req.userId }).populate('uploadedBy', 'name');
     res.json(videos);
@@ -55,7 +56,6 @@ router.get('/my-videos', auth, async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
 
 // ✅ GET video by ID (dynamic route, must come last among GETs)
 router.get('/:id', async (req, res) => {
@@ -71,4 +71,4 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', updateVideo);
 router.delete('/:id', deleteVideo);
 
-module.exports = router;
+export default router;

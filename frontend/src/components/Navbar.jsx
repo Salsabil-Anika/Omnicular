@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Navbar.css'; // make sure to create/edit this CSS file
+import './Navbar.css';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function Navbar() {
     if (isLoggedIn) {
       localStorage.removeItem('token');
       setIsLoggedIn(false);
-      navigate('/auth'); // Sign in page
+      navigate('/auth');
     } else {
       navigate('/auth');
     }
@@ -34,9 +34,17 @@ export default function Navbar() {
 
   const handleUploadClick = () => {
     if (!isLoggedIn) {
-      navigate('/auth'); // redirect to sign in
+      navigate('/auth');
     } else {
       navigate('/upload');
+    }
+  };
+
+  const handleProfileClick = () => {
+    if (!isLoggedIn) {
+      navigate('/auth');
+    } else {
+      navigate('/profile'); // your profile page route
     }
   };
 
@@ -55,13 +63,18 @@ export default function Navbar() {
           onKeyDown={handleKeyDown}
           className="search-input"
         />
-        <button onClick={handleSearch} className="search-button">Go</button>
+        <button onClick={handleSearch} className="search-button">
+          Go
+        </button>
       </div>
 
       <div className="nav-buttons">
+        {isLoggedIn && (
+          <button onClick={handleProfileClick}>Profile</button>
+        )}
         <button onClick={handleUploadClick}>Upload</button>
         <button onClick={handleAuthClick}>
-          {isLoggedIn ? 'Sign Out' : 'Sign In'}
+          {isLoggedIn ? 'Logout' : 'Login'}
         </button>
       </div>
     </nav>

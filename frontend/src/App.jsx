@@ -7,6 +7,7 @@ import VideoPlayerPage from './pages/VideoPlayerPage';
 import SearchResult from './pages/SearchResult';
 import MyVideos from './pages/MyVideos';
 import ProtectedRoute from './components/ProtectedRoute';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/video/:id" element={<VideoPlayerPage />} />
       <Route path="/search" element={<SearchResult />} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Routes>
   );
 }

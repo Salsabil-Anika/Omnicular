@@ -1,6 +1,6 @@
 // src/services/videoService.js
 import axios from 'axios';
-
+import { getToken } from './authService';
 const API_URL = 'http://localhost:5000/api/videos';
 
 export const uploadVideo = (formData) => axios.post(API_URL, formData);
@@ -17,3 +17,9 @@ export const searchVideos = async (query) => {
   return res.data;
 };
 
+export const getMyVideos = async () => {
+  const res = await axios.get(`${API_URL}/my-videos`, {
+    headers: { Authorization: `Bearer ${getToken()}` }
+  });
+  return res.data;
+};
