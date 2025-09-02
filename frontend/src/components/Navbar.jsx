@@ -22,19 +22,19 @@ export default function Navbar() {
     if (e.key === 'Enter') handleSearch();
   };
 
-  const handleAuthClick = () => {
+  const handleSignInClick = () => {
     if (isLoggedIn) {
       localStorage.removeItem('token');
       setIsLoggedIn(false);
-      navigate('/auth');
+      navigate('/SignIn');
     } else {
-      navigate('/auth');
+      navigate('/SignIn');
     }
   };
 
   const handleUploadClick = () => {
     if (!isLoggedIn) {
-      navigate('/auth');
+      navigate('/signin');
     } else {
       navigate('/upload');
     }
@@ -42,7 +42,7 @@ export default function Navbar() {
 
   const handleProfileClick = () => {
     if (!isLoggedIn) {
-      navigate('/auth');
+      navigate('/signin');
     } else {
       navigate('/profile'); // your profile page route
     }
@@ -50,7 +50,7 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <h2 style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+      <h2 style={{ cursor: 'pointer', margin: 0 }} onClick={() => navigate('/')}>
         Omnicular
       </h2>
 
@@ -73,7 +73,7 @@ export default function Navbar() {
           <button onClick={handleProfileClick}>Profile</button>
         )}
         <button onClick={handleUploadClick}>Upload</button>
-        <button onClick={handleAuthClick}>
+        <button onClick={handleSignInClick}>
           {isLoggedIn ? 'Logout' : 'Login'}
         </button>
       </div>

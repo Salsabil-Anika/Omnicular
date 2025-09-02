@@ -1,0 +1,26 @@
+.sidebar {
+  position: sticky;
+  top: 56px; /* height of navbar approx */
+  align-self: start;
+  background: #ffffff;
+  border-right: 1px solid #eaeaea;
+  padding: 12px;
+}
+
+.sidebar-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border: 1px solid #eaeaea;
+  background: #fafafa;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sidebar-link:hover {
+  background: #f0f0f0;
+}
+
+

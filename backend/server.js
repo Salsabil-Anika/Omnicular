@@ -32,9 +32,14 @@ app.use("/uploads", express.static("uploads"));
 
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/omnicular')
-  .then(() => console.log('MongoDB connected'))
-  .catch(console.error);
+
+mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/omnicular', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected'))
+.catch((err) => console.log('MongoDB connection error:', err));
+
 
 // Routes
 app.use('/api/videos', videoRoutes);

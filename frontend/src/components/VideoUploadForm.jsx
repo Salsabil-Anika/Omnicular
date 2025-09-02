@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { uploadVideo } from '../services/videoService';
 
 const VideoUploadForm = ({ onUploadSuccess }) => {
   const [title, setTitle] = useState('');
@@ -14,9 +14,7 @@ const VideoUploadForm = ({ onUploadSuccess }) => {
     formData.append('video', video);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/videos', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const res = await uploadVideo(formData);
 
       console.log('Upload response:', res.data);
 

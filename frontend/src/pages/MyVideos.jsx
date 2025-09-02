@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
 import VideoGrid from '../components/VideoGrid';
 import axios from 'axios';
 
@@ -26,15 +24,9 @@ export default function MyVideos() {
     }, []);
 
     return (
-        <div className="my-videos-page">
-            <Navbar />
-            <div className="main-content">
-                <Sidebar />
-                <div style={{ flex: 1, padding: '20px' }}>
-                    <h2>My Videos</h2>
-                    <VideoGrid videos={videos} />
-                </div>
-            </div>
+        <div className="my-videos-page" style={{ padding: '20px' }}>
+            <h2>My Videos</h2>
+            <VideoGrid videos={videos} />
         </div>
     );
 }

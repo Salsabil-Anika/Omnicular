@@ -1,15 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Sidebar.css';
 
 export default function Sidebar() {
   const navigate = useNavigate();
   
   return (
     <div className="sidebar">
-      <a onClick={() => navigate('/profile')}>Profile</a>
-      <a onClick={() => navigate('/following')}>Following</a>
-      <a onClick={() => navigate('/upload')}>Upload</a>
-      <a onClick={() => navigate('/')}>Home</a>
+      <button className="sidebar-link" onClick={() => navigate('/')}>Home</button>
+      <button className="sidebar-link" onClick={() => navigate('/upload')}>Upload</button>
+      <button className="sidebar-link" onClick={() => navigate('/my-videos')}>My Videos</button>
+      <button className="sidebar-link" onClick={() => navigate('/profile')}>Profile</button>
     </div>
   );
 }

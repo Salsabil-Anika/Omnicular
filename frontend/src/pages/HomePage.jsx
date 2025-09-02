@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
 import { getVideos } from '../services/videoService';
 import VideoGrid from '../components/VideoGrid';
 import './HomePage.css';
@@ -32,11 +30,7 @@ export default function HomePage() {
 
   return (
     <div className="homepage">
-      <Navbar onSearch={handleSearch} />
-      <div className="main-content">
-        <Sidebar />
-        <VideoGrid videos={filteredVideos} />
-      </div>
+      <VideoGrid videos={filteredVideos} />
     </div>
   );
 }

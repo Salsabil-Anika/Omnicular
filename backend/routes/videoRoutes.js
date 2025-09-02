@@ -50,7 +50,7 @@ router.get('/search', async (req, res) => {
 // ✅ Get logged-in user's videos
 router.get('/my-videos', protect, async (req, res) => {
   try {
-    const videos = await Video.find({ uploadedBy: req.userId }).populate('uploadedBy', 'name');
+    const videos = await Video.find({ uploadedBy: req.userId || (req.user && req.user._id) }).populate('uploadedBy', 'name');
     res.json(videos);
   } catch (err) {
     res.status(500).json({ message: err.message });

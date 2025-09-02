@@ -9,20 +9,12 @@
 
 .main-content {
   display: flex;
-  flex: 1;
-  overflow: hidden;
   background-color: #f9f9f9;
 }
 
 /* Sidebar */
 
-.sidebar {
-  width: 220px;
-  background-color: #202020;
-  color: white;
-  padding: 20px;
-  box-sizing: border-box;
-}
+/* Sidebar is globally styled by components/Sidebar.css */
 
 .sidebar a {
   color: white;
@@ -44,7 +36,6 @@
   grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
   gap: 20px;
   padding: 20px;
-  overflow-y: auto;
 }
 
 /* Video Card */
@@ -79,14 +70,7 @@
 
 /* Navbar */
 
-.navbar {
-  background-color: #121212;
-  padding: 10px 20px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+/* Navbar is globally styled by components/Navbar.css */
 
 .navbar h2 {
   margin: 0;
