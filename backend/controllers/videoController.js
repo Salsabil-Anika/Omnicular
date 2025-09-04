@@ -47,8 +47,25 @@ export const getAllVideos = async (req, res) => {
 export const updateVideo = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title } = req.body;
-        const updatedVideo = await Video.findByIdAndUpdate(id, { title }, { new: true });
+        const { title, description } = req.body;
+        const userId = req.userId || (req.user && req.user._id);
+
+        // Check if video exists and user owns it
+        const video = await Video.findById(id);
+        if (!video) {
+            return res.status(404).json({ message: 'Video not found' });
+        }
+
+        if (video.uploadedBy.toString() !== userId) {
+            return res.status(403).json({ message: 'Not authorized to edit this video' });
+        }
+
+        const updatedVideo = await Video.findByIdAndUpdate(
+            id, 
+            { title, description }, 
+            { new: true }
+        ).populate('uploadedBy', 'name');
+
         res.json(updatedVideo);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -57,9 +74,18 @@ export const updateVideo = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
     try {
-        const video = await Video.findById(req.params.id);
+        const { id } = req.params;
+        const userId = req.userId || (req.user && req.user._id);
+
+        const video = await Video.findById(id);
         if (!video) return res.status(404).json({ message: 'Video not found' });
 
+        // Check if user owns the video
+        if (video.uploadedBy.toString() !== userId) {
+            return res.status(403).json({ message: 'Not authorized to delete this video' });
+        }
+
+        // Delete the video file
         const filePath = path.join(__dirname, '..', video.videoUrl);
         fs.unlink(filePath, (err) => {
             if (err) console.warn('File not found or already deleted.');

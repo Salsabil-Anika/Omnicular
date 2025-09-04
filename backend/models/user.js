@@ -7,6 +7,8 @@ const userSchema = new mongoose.Schema({
   profilePicture: { type: String, default: "" },
   birthday: { type: Date },
   bio: { type: String },
+  likedVideos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Video' }],
+  dislikedVideos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Video' }],
 });
 
 const User = mongoose.model("User", userSchema);

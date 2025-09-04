@@ -1,33 +1,121 @@
 .video-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
   background-color: #fff;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
 }
 
 .video-card:hover {
-  transform: scale(1.02);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.video-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.video-thumbnail {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
 }
 
 .video-player {
   width: 100%;
-  height: 160px; /* adjust height to make cards shorter */
-  border-radius: 6px;
+  height: 100%;
   object-fit: cover;
+  border-radius: 0;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.video-card:hover .video-overlay {
+  opacity: 1;
+}
+
+.play-icon {
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.video-info {
+  padding: 15px;
 }
 
 .video-title {
-  margin: 8px 0 4px;
-  font-size: 16px;
+  margin: 0 0 8px 0;
+  font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  color: #212529;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.video-uploader {
-  font-size: 14px;
-  color: #666;
+.video-uploader-link {
+  font-size: 0.85rem;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.video-uploader-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.video-stats {
+  display: flex;
+  gap: 15px;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-icon {
+  font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .video-thumbnail {
+    height: 150px;
+  }
+  
+  .video-info {
+    padding: 12px;
+  }
+  
+  .video-stats {
+    gap: 10px;
+  }
 }

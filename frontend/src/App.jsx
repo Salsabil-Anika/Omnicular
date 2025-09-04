@@ -8,6 +8,7 @@ import SearchResult from './pages/SearchResult';
 import MyVideos from './pages/MyVideos';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
+import UserProfilePage from './pages/UserProfilePage';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import './index.css';
@@ -50,6 +51,7 @@ function App() {
         <Route path="/video/:id" element={<VideoPlayerPage />} />
         <Route path="/search" element={<SearchResult />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/user/:id" element={<UserProfilePage />} />
       </Route>
 
       <Route path="/signin" element={<SignIn />} />

@@ -2,6 +2,7 @@ import express from "express";
 import multer from "multer";
 import { protect } from "../middleware/authMiddleware.js";
 import User from "../models/user.js";
+import Video from "../models/videoModel.js";
 
 const router = express.Router();
 
@@ -15,6 +16,37 @@ const upload = multer({ storage });
 // ✅ Get logged-in user's profile
 router.get("/me", protect, (req, res) => {
   res.json({ user: req.user });
+});
+
+// ✅ Get user profile by ID (public)
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Get user's uploaded videos
+    const videos = await Video.find({ uploadedBy: req.params.id })
+      .sort({ createdAt: -1 })
+      .populate('uploadedBy', 'name');
+
+    // Get user's liked videos
+    const likedVideos = await Video.find({ _id: { $in: user.likedVideos } })
+      .populate('uploadedBy', 'name');
+
+    res.json({
+      user,
+      videos: videos || [],
+      likedVideos: likedVideos || [],
+      stats: {
+        uploadedCount: videos.length,
+        likedCount: likedVideos.length
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 // ✅ Update user profile (name, birthday, bio)
