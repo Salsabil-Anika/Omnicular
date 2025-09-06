@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { searchVideos } from "../services/videoService"; // ✅ correct function
+import { searchVideos } from "../services/videoService";
 import VideoGrid from "../components/VideoGrid";
 
 export default function SearchResults() {
   const [videos, setVideos] = useState([]);
   const location = useLocation();
 
-  // Get query string value
+ 
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get("query") || "";
 

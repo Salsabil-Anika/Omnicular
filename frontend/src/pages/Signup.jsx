@@ -17,7 +17,7 @@ export default function SignUp() {
       const { token, user } = res.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      navigate('/upload'); // go to protected page after signup
+      navigate('/upload');
     } catch (err) {
       setError(err.response?.data?.message || 'Signup failed');
     }

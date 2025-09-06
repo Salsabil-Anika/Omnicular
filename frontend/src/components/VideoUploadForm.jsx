@@ -18,14 +18,12 @@ const VideoUploadForm = ({ onUploadSuccess }) => {
 
       console.log('Upload response:', res.data);
 
-      // ✅ Show backend message
       alert(res.data.message || 'Upload successful!');
 
-      // ✅ Clear form if successful
+
       setTitle('');
       setVideo(null);
 
-      // ✅ Let parent know upload finished
       if (onUploadSuccess) onUploadSuccess(res.data.video);
 
     } catch (err) {

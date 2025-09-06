@@ -13,24 +13,21 @@ export default function ProfilePage() {
     const [formData, setFormData] = useState({});
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [activeTab, setActiveTab] = useState('uploaded'); // 'uploaded' or 'liked'
+    const [activeTab, setActiveTab] = useState('uploaded');
     const [editingVideo, setEditingVideo] = useState(null);
     const [editFormData, setEditFormData] = useState({});
 
     useEffect(() => {
         async function fetchData() {
             try {
-                // Fetch user info
                 const data = await getUserProfile();
                 const userData = data.user || data;
                 setUser(userData);
                 setFormData(userData);
 
-                // Fetch user's uploaded videos
                 const myVideos = await getMyVideos();
                 setVideos(myVideos);
 
-                // Fetch user's liked videos
                 const likedVids = await getLikedVideos();
                 setLikedVideos(likedVids);
                 
@@ -53,12 +50,10 @@ export default function ProfilePage() {
 
     const saveProfile = async () => {
         try {
-            // Update basic info
             const updatedResponse = await updateUserProfile(formData);
             const updatedUser = updatedResponse.user || updatedResponse;
             setUser(updatedUser);
 
-            // Upload profile picture if selected
             if (file) {
                 const updatedPicResponse = await uploadProfilePicture(file);
                 const updatedUserWithPic = updatedPicResponse.user || updatedPicResponse;
@@ -110,7 +105,6 @@ export default function ProfilePage() {
 
     return (
         <div className="profile-page">
-            {/* PROFILE HEADER */}
             <div className="profile-header">
                 <div className="profile-info">
                     <div className="profile-avatar-container">
@@ -190,7 +184,6 @@ export default function ProfilePage() {
                 </button>
             </div>
 
-            {/* VIDEOS SECTION */}
             <div className="videos-section">
                 {activeTab === 'uploaded' ? (
                     <div className="uploaded-videos">

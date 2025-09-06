@@ -44,7 +44,7 @@ export default function Navbar() {
     if (!isLoggedIn) {
       navigate('/signin');
     } else {
-      navigate('/profile'); // your profile page route
+      navigate('/profile'); 
     }
   };
 

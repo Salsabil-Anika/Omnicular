@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// Layout now provided by App Shell
 import axios from 'axios';
 import { uploadVideo as uploadVideoService } from '../services/videoService';
 import './uploadPage.css';
@@ -12,7 +11,6 @@ export default function UploadPage() {
   const [videoFile, setVideoFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Redirect if not logged in
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {

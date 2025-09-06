@@ -332,7 +332,7 @@
   background: #5a6268;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .profile-page {
     padding: 0 10px;

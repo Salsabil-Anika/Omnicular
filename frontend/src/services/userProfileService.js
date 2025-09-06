@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api';
 
-// Get auth token
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
   return {
@@ -11,7 +10,6 @@ const getAuthHeaders = () => {
   };
 };
 
-// Get user profile by ID
 export const getUserProfileById = async (userId) => {
   try {
     const response = await axios.get(`${API_URL}/users/${userId}`);
@@ -21,7 +19,6 @@ export const getUserProfileById = async (userId) => {
   }
 };
 
-// Update video
 export const updateVideo = async (videoId, data) => {
   try {
     const response = await axios.put(
@@ -35,7 +32,6 @@ export const updateVideo = async (videoId, data) => {
   }
 };
 
-// Delete video
 export const deleteVideo = async (videoId) => {
   try {
     const response = await axios.delete(

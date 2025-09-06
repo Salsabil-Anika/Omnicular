@@ -26,7 +26,6 @@ export default function VideoPlayerPage() {
       setLikesCount(res.data.likes?.length || 0);
       setDislikesCount(res.data.dislikes?.length || 0);
       
-      // Check if current user has liked/disliked
       const currentUser = JSON.parse(localStorage.getItem('user'));
       if (currentUser) {
         setUserLiked(res.data.likes?.includes(currentUser._id) || false);

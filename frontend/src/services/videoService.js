@@ -1,4 +1,3 @@
-// src/services/videoService.js
 import axios from 'axios';
 import { getToken } from './authService';
 const API_URL = 'http://localhost:5000/api/videos';

@@ -59,7 +59,6 @@ export const shareVideo = async (videoId) => {
     await navigator.clipboard.writeText(videoUrl);
     return { success: true, message: 'Video link copied to clipboard!' };
   } catch (error) {
-    // Fallback for older browsers
     const textArea = document.createElement('textarea');
     textArea.value = videoUrl;
     document.body.appendChild(textArea);

@@ -14,7 +14,6 @@ export default function UserProfilePage() {
 
   useEffect(() => {
     fetchUserProfile();
-    // Get current user from localStorage
     const user = JSON.parse(localStorage.getItem('user'));
     setCurrentUser(user);
   }, [id]);

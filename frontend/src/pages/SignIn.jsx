@@ -17,7 +17,7 @@ export default function SignIn() {
       const { token, user } = res;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      navigate('/upload'); // go to protected page
+      navigate('/upload'); 
     } catch (err) {
       setError(err.response?.data?.message || err.message || 'Login failed');
     }
